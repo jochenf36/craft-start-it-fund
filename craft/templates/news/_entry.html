@@ -1,24 +1,48 @@
-{#
- # News entry template
- # -------------------
- #
- # This template gets loaded whenever a News entry’s URL is
- # requested. That’s because the News section’s Template setting is
- # set to “news/_entry”, the path to this template.
- #
- # When this template is loaded, it will already have an ‘entry’
- # variable, set to the requested News entry.
- #
- # See this page for more details on how Craft routes requests:
- # http://craftcms.com/docs/routing
- #}
+{# # News entry template # ------------------- # # This template gets loaded whenever a News entry’s URL is # requested.
+That’s because the News section’s Template setting is # set to “news/_entry”, the path to this template. # # When this template
+is loaded, it will already have an ‘entry’ # variable, set to the requested News entry. # # See this page for more details
+on how Craft routes requests: # http://craftcms.com/docs/routing #} {% extends "_layout" %} {% block content %}
+<section class="page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>News</h1>
+			</div>
+		</div>
+	</div>
+</section>
+<div class="container">
 
-{% extends "_layout" %}
+	<div class="blog-posts single-post">
+		<div class="pure-g">
+			<div class="pure-u-3-5">
+				<article class="post post-large blog-single-post">
+					<div class="post-date">
+						<span class="day">{{ entry.postDate.format('d') }}</span>
+						<span class="month">{{ entry.postDate.format('M') }}</span>
+					</div>
+					<div class="post-content">
+						<h2><a href="{{entry.url}}">{{ entry.title }}</a></h2>
+						<div class="post-meta">
+							<span><i class="fa fa-user"></i> By <a href="#">John Doe</a> </span> </div>
+						<div>
+							{{ entry.body }}
+							<article>
+								{% include "_includes/article_body" %}
+							</article>
+						</div>
+					</div>
+				</article>
+			</div>
+			<div class="pure-u-1-5">
+			</div>
+			<div class="pure-u-1-5">
+				<article>
+					{% include "_includes/sidebar_body" %}
+				</article>
+			</div>
+		</div>
+	</div>
+</div>
 
-{% block content %}
-	<article>
-		<h1>{{ entry.title }}</h1>
-		<p>Posted on {{ entry.postDate.format('F d, Y') }}</p>
-		{{ entry.body }}
-	</article>
 {% endblock %}

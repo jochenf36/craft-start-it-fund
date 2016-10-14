@@ -20,14 +20,36 @@
 {% extends "_layout" %}
 
 {% block content %}
-	<h1>{{ entry.title }}</h1>
+	<div role="main" class="main">
+				{% set image = entry.bannerImage.first() %}
+									{% if image %}
+											<img 
+												style="width: 100%;"
+												data-bgposition="center center" 
+												data-bgfit="cover" 
+												data-bgrepeat="no-repeat" 
+												class="rev-slidebg"
+												src="{{ image.getUrl({ width: 1440, height: 260 }) }}" alt="{{ image.title }}"
+											>
+								{% endif %}		
+		<div class="home-intro" id="home-intro">
+					<div class="container">
 
-	{{ entry.body }}
+						<div class="row">
+							<div class="col-md-8">
+								<p>
+									{{ entry.headerTitle }}
+								</p>
+							</div>
+						</div>
 
-	<h2>Recent News</h2>
-	<ul>
-		{% for entry in craft.entries.section('news').limit(5).find() %}
-			<li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
-		{% endfor %}
-	</ul>
+					</div>
+				</div>						
+		<div class="container">
+			<div class="row">
+				<h1>{{ entry.title }}</h1>
+				{{ entry.body }}		
+			</div>	
+		</div>
+	</div>
 {% endblock %}
